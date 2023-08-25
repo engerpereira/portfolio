@@ -1,0 +1,419 @@
+@use '_reset';
+@import '_mixin';
+
+/*Variables*/
+$colorPrincipal: #07090D;
+$colorSecundario: #161A26;
+$colorTerceario: #272D40;
+$colorBoton: #555554;
+$color: #D9D9D9;
+$textoP: 'Montserrat', sans-serif;
+$textoT: 'Dancing Script', cursive;
+$textoT2: 'Montserrat', sans-serif;
+
+
+  .header {
+      width: 100%;
+      position: fixed;
+      @include flex(row, wrap , space-between , center);
+      padding: 2em;
+      background-color: none;
+      color:$color;
+      transition: ease 1s;
+      &__a {
+    }
+    &__menudown{
+        z-index: 10;
+        background: $colorPrincipal;
+        padding: 1em;
+    }
+    &__button{
+        display: none;
+        cursor: pointer;
+        @include responsive(){
+            display: block;
+        }
+
+    }
+    &__h1 {
+        font-family: $textoT;
+        font-size: 1.5rem;
+        
+    }
+    &__li {
+        margin: 0 1em;
+        @include responsive(){
+            margin: 1em 0;
+        }
+    }
+    &__nav {
+        @include responsive(){
+            width: 100%;
+            @include flex(column, nowrap, center, center);
+            opacity: 0;
+            height: 0vh;
+            overflow: hidden;
+            transition: all .5s ease;
+            &--activo{
+                opacity: 1;
+                height: 50vh;
+                
+            }
+        }
+    }
+    &__svg{
+        width: 2em;
+        height: 2em;
+        color: $color;
+    }
+    &__ul {
+        @include flex(row, nowrap , space-between , center);
+        @include responsive(){
+            flex-direction: column;
+        }
+    }
+  }
+  .inicio {
+    @include flex(column, wrap, center, center);
+      height: 100vh;
+      background: rgb(7,9,13);
+      background: linear-gradient(180deg, rgba(7,9,13,1) 0%, rgba(22,26,38,1) 50%, rgba(39,45,64,1) 100%);
+    &__button {
+            background-color: $colorPrincipal;
+            border: none;
+            border-radius: 5%;
+            cursor: pointer;
+            color: $color;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            margin: 0 10px; 
+    }
+    &__descarga {
+        @include flex(row, nowrap, center, center);
+            background-color: $colorPrincipal;
+            border: none;
+            border-radius: 5%;
+            cursor: pointer;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 1em;
+            margin: 0 10px;
+            &--p{
+                display: inline-block;   
+                text-decoration: none;
+                color: $color;
+            }
+            &--svg{
+            display: inline-block;
+            margin: 0 0 0 0.5em;
+            width: 1em;
+            height: 1em;
+            color: $color; 
+            }
+    }
+    &__div {
+        width: 100%;
+    }
+    &__h2 {
+        font-family: $textoT2;
+        text-align: center;
+        font-size: 3em;
+        color: $color;
+        font-weight: 700;
+    }
+    &__p {
+        text-align: center;
+        font-size: 1.5em;
+        color: darkgray;
+    }
+}
+.main {
+    &__div {
+        @include flex(row, wrap, center, center);
+        margin: 20px 0;
+        width: 100%;
+        &--li {
+        }
+        &--ul {
+            width: 100%;
+        }
+    }
+    &__arrow{
+        position: fixed;
+        background-color: $color;
+        border-radius: 10px;
+        transition: ease 1s;
+        right: -50px;
+        bottom: 20px;
+        cursor: pointer;
+        &:hover{
+            background-color: $colorPrincipal;
+            transition: ease 1s;
+        }
+        &--svg{
+            color: $colorPrincipal;
+            width: 3rem;
+            height: 3rem;
+            &:hover{
+                color: $color;
+                transition: ease 1s;
+            }
+        }
+    }
+    &__arrowup{
+        right: 20px;
+        bottom: 20px;
+        transition: ease 1s;
+    }
+}
+.portfolio {
+    background: $colorSecundario;
+    @include flex(column, wrap, center, center);
+    &__div {
+        gap: 1rem;
+        @include flex(row, wrap, center, center);
+        @include responsive(){
+            gap: 0;
+        }
+        background-color: $colorSecundario;
+        color: $color;
+        padding: 3rem 0;
+        width: 100%;
+    }
+    &__article {
+        @include flex(row, wrap, center, center);
+        width: 31%;
+        overflow: hidden;
+        padding: 0;
+        border-radius: 0.3rem;
+        box-shadow: 0 0.2rem 0.3rem rgba( 0, 0, 0, 0.4);
+        max-width: 350px;
+        background: $colorTerceario;
+        padding: .5rem;
+        @include responsive(){
+            width: 80%;
+            margin: 0;
+            box-shadow: none;
+            max-width: 100%;
+        }
+        @include responsive(768px){
+            width: 90%;
+            margin: 0;
+            box-shadow: none;
+            max-width: 100%;
+        }
+    }
+    &__tecnologia{
+        background: $colorSecundario;
+        width: 100%;
+        padding: 1rem;
+        border-radius: 5px;
+        border: 1px solid $colorPrincipal;
+    }
+    &__ul{
+        @include flex(row, wrap, center, center)
+    }
+    &__li{
+        margin: 0 .5rem;
+        border: 1px solid $colorPrincipal;
+        padding: .5rem;
+        border-radius: 5px;
+        background: $colorPrincipal;
+
+    }
+    
+    &__h2 {
+        font-family: $textoT2;
+        text-align: center;
+        font-size: 3em;
+        color: $color;
+        margin-bottom: 2rem;
+        font-weight: 700;
+    }
+    &__h3 {
+        text-align: center;
+        font-size: 1.5em;
+        color: $color;
+        margin: 1em;
+    }
+    &__img {
+       
+    }
+    &__p {
+    }
+}
+.about {
+    @include flex(row, wrap, center, center);
+    background: rgb(7,9,13);
+    background: linear-gradient(180deg, rgba(7,9,13,1) 0%, rgba(22,26,38,1) 50%, rgba(39,45,64,1) 100%);
+    color: $color;
+    padding: 3rem;
+    gap: 3%;
+    &__h2 {
+        font-family: $textoT2;
+        font-size: 3rem;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-weight: 700;
+    }
+    &__card{
+        @include flex(column, wrap, center, center);
+        background-color: $colorSecundario;
+	    border-radius: 5px;
+	    box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
+	    color: $color;
+	    padding-top: 30px;
+	    position: relative;
+	    width: 350px;
+	    max-width: 100%;
+	    text-align: center;
+    }
+    &__h3{
+        font-size: 1.5rem;
+    }
+    &__h4{
+        font-size: 1rem;
+    }
+    &__p{
+        padding: 0 1rem;
+    }
+    &__p, &__h4, &__h3{
+        margin-bottom: .5rem;
+    }
+    &__img{
+	    border-radius: 50%;
+        margin-bottom: 1.5rem;
+        max-width: 150px;
+        @include responsive(){
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+    }
+    &__button{
+        @include flex(row, wrap, center, center);
+    }
+    .button__btn{
+            
+            border: 1px solid $colorBoton;
+            border-radius: 50%;
+            color: $color;
+            font-family: Montserrat, sans-serif;
+            padding: .5rem;
+            margin: .5rem;
+            cursor: pointer;
+            &--lk{
+                background-color: #0270AD;
+            }
+            &--gh{
+                background-color: #111111;
+            }
+            &--ig{
+                background-color: #6D44D5;
+            }
+        }    
+    .habilidad{
+        background-color: $colorPrincipal;
+	    text-align: center;
+	    padding: 15px;
+        margin-bottom: 1rem;
+    &__ul{
+        margin: 0;
+	    padding: 0;
+    }
+    &__li{
+        border: 1px solid #2D2747;
+	    border-radius: 2px;
+	    display: inline-block;
+	    font-size: 12px;
+	    margin: 0 7px 7px 0;
+	    padding: 7px;
+    &--html{
+        background-color: #F64A1D;
+    }
+    &--css{
+        background-color: #163256;
+    }
+    &--js{
+        background-color: #EFD81D;
+        color: $colorPrincipal;
+    }
+    &--sass{
+        background-color: #C76494;
+    }
+    &--git{
+        background-color: #E84E31;
+    }
+    &--wp{
+        background-color: #227299;
+    }
+    &--ai{
+        background-color: #310000;
+    }
+    }
+    &__h4{
+        padding: 1rem;
+    }
+    }
+    &__div{
+        width: 65%;
+        @include responsive(){
+            width: 100%;
+        }
+        &--skills{
+            @include flex(column, wrap, center, center);
+        }
+    }
+    &__p {
+        margin-bottom: 1rem
+    }
+  }
+.footer {
+    @include flex(row, wrap, space-between, center);
+    background-color: $colorPrincipal;
+    color: $color;
+    padding: 3rem;
+    @include responsive(){
+        @include flex(column, wrap, center, center);
+    }
+    @include responsive(768px){
+        @include flex(column, wrap, center, center);
+    }
+    &__rrss{
+        margin: 1rem;
+    }
+    &__ul{
+        @include flex(row, nowrap, center, center);
+    }
+    &__li{
+        margin: .5rem;
+        background-color: $colorTerceario;
+        padding: .5rem;
+        border-radius: 50%;
+    }
+    &__texto{
+        margin: 1rem;
+        
+    }
+    &__logo{
+        font-family: $textoT;
+        font-size: 1.5rem;
+        margin: 1rem;
+    }
+    &__dda{
+        width: 100%;
+        text-align: right;
+        margin: 1rem;
+        @include responsive(){
+            text-align: center;
+        }
+        @include responsive(768px){
+            width: inherit;
+        }
+        
+    }
+}
+  

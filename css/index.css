@@ -1,0 +1,792 @@
+@charset "UTF-8";
+/* Definimos las Custom properties */
+:root {
+  /* Colores */
+  --negro: #393939;
+  /* Tipografía */
+  --tipo-principal: "Roboto", sans-serif;
+  --tipo-secundaria: Verdana;
+}
+
+/* (Opcional) Las adaptamos al modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --negro: #ececec;
+  }
+}
+/* (Opcional) Desactivamos los animations en el caso de que el usuario haya configurado el modo sin animation */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    -webkit-animation: none !important;
+            animation: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+}
+/* Reseteamos los margin y paddings de todas las etiquetas */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+*::before, *::after {
+  display: block;
+}
+
+/* Evitamos problemas con las imagenes */
+img, picture, video, iframe, figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  /* (Opcional) */
+  -o-object-fit: cover;
+     object-fit: cover;
+  /* (Opcional) */
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+/* Reseteamos los enlaces para funcionar como cajas... */
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ... excepto los que se encuentran en párrafos */
+p a {
+  display: inline;
+}
+
+/* Quitamos los puntos de los <li> */
+li {
+  list-style-type: none;
+}
+
+/* (Opcional) Configuramos anclas suaves */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Desactivamos estilos por defecto de las principales etiquetas de texto */
+h1, h2, h3, h4, h5, h6, p, span, a, strong, blockquote, i, b, u, em {
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Evitamos problemas con los pseudoelementos de quotes */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+/* (Opcional) Configuramos el texto que seleccionamos */
+::-moz-selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+::selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+/* Nivelamos problemas de tipografías y colocación de formularios */
+form, input, textarea, select, button, label {
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+  background-color: transparent;
+  color: inherit;
+  display: block;
+  /* (Opcional) */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+/* Reseteamos las tablas */
+table, tr, td {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Evitamos problemas con los SVG */
+svg {
+  width: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+/* Configuramos la tipografía para toda la web */
+body {
+  min-height: 100vh;
+  font-size: 100%;
+  font-family: var(--tipo-principal);
+  color: var(--negro);
+  /* (Opcional) */
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+  /* (Opcional) */
+  font-smooth: always;
+  /* (Opcional) */
+  -webkit-font-smoothing: antialiased;
+  /* (Opcional) */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*Variables*/
+.header {
+  width: 100%;
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 2em;
+  background-color: none;
+  color: #D9D9D9;
+  -webkit-transition: ease 1s;
+  transition: ease 1s;
+}
+.header__menudown {
+  z-index: 10;
+  background: #07090D;
+  padding: 1em;
+}
+.header__button {
+  display: none;
+  cursor: pointer;
+}
+@media screen and (max-width: 480px) {
+  .header__button {
+    display: block;
+  }
+}
+.header__h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5rem;
+}
+.header__li {
+  margin: 0 1em;
+}
+@media screen and (max-width: 480px) {
+  .header__li {
+    margin: 1em 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .header__nav {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    opacity: 0;
+    height: 0vh;
+    overflow: hidden;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+  .header__nav--activo {
+    opacity: 1;
+    height: 50vh;
+  }
+}
+.header__svg {
+  width: 2em;
+  height: 2em;
+  color: #D9D9D9;
+}
+.header__ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media screen and (max-width: 480px) {
+  .header__ul {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.inicio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  background: rgb(7, 9, 13);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgb(7, 9, 13)), color-stop(50%, rgb(22, 26, 38)), to(rgb(39, 45, 64)));
+  background: linear-gradient(180deg, rgb(7, 9, 13) 0%, rgb(22, 26, 38) 50%, rgb(39, 45, 64) 100%);
+}
+.inicio__button {
+  background-color: #07090D;
+  border: none;
+  border-radius: 5%;
+  cursor: pointer;
+  color: #D9D9D9;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  margin: 0 10px;
+}
+.inicio__descarga {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #07090D;
+  border: none;
+  border-radius: 5%;
+  cursor: pointer;
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 1em;
+  margin: 0 10px;
+}
+.inicio__descarga--p {
+  display: inline-block;
+  text-decoration: none;
+  color: #D9D9D9;
+}
+.inicio__descarga--svg {
+  display: inline-block;
+  margin: 0 0 0 0.5em;
+  width: 1em;
+  height: 1em;
+  color: #D9D9D9;
+}
+.inicio__div {
+  width: 100%;
+}
+.inicio__h2 {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  font-size: 3em;
+  color: #D9D9D9;
+  font-weight: 700;
+}
+.inicio__p {
+  text-align: center;
+  font-size: 1.5em;
+  color: darkgray;
+}
+
+.main__div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 20px 0;
+  width: 100%;
+}
+.main__div--ul {
+  width: 100%;
+}
+.main__arrow {
+  position: fixed;
+  background-color: #D9D9D9;
+  border-radius: 10px;
+  -webkit-transition: ease 1s;
+  transition: ease 1s;
+  right: -50px;
+  bottom: 20px;
+  cursor: pointer;
+}
+.main__arrow:hover {
+  background-color: #07090D;
+  -webkit-transition: ease 1s;
+  transition: ease 1s;
+}
+.main__arrow--svg {
+  color: #07090D;
+  width: 3rem;
+  height: 3rem;
+}
+.main__arrow--svg:hover {
+  color: #D9D9D9;
+  -webkit-transition: ease 1s;
+  transition: ease 1s;
+}
+.main__arrowup {
+  right: 20px;
+  bottom: 20px;
+  -webkit-transition: ease 1s;
+  transition: ease 1s;
+}
+
+.portfolio {
+  background: #161A26;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.portfolio__div {
+  gap: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #161A26;
+  color: #D9D9D9;
+  padding: 3rem 0;
+  width: 100%;
+}
+@media screen and (max-width: 480px) {
+  .portfolio__div {
+    gap: 0;
+  }
+}
+.portfolio__article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 31%;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 0.3rem;
+  -webkit-box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.4);
+  max-width: 350px;
+  background: #272D40;
+  padding: 0.5rem;
+}
+@media screen and (max-width: 480px) {
+  .portfolio__article {
+    width: 80%;
+    margin: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .portfolio__article {
+    width: 90%;
+    margin: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    max-width: 100%;
+  }
+}
+.portfolio__tecnologia {
+  background: #161A26;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #07090D;
+}
+.portfolio__ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.portfolio__li {
+  margin: 0 0.5rem;
+  border: 1px solid #07090D;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background: #07090D;
+}
+.portfolio__h2 {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  font-size: 3em;
+  color: #D9D9D9;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+.portfolio__h3 {
+  text-align: center;
+  font-size: 1.5em;
+  color: #D9D9D9;
+  margin: 1em;
+}
+.about {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: rgb(7, 9, 13);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgb(7, 9, 13)), color-stop(50%, rgb(22, 26, 38)), to(rgb(39, 45, 64)));
+  background: linear-gradient(180deg, rgb(7, 9, 13) 0%, rgb(22, 26, 38) 50%, rgb(39, 45, 64) 100%);
+  color: #D9D9D9;
+  padding: 3rem;
+  gap: 3%;
+}
+.about__h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 3rem;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+.about__card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #161A26;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+          box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  color: #D9D9D9;
+  padding-top: 30px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+}
+.about__h3 {
+  font-size: 1.5rem;
+}
+.about__h4 {
+  font-size: 1rem;
+}
+.about__p {
+  padding: 0 1rem;
+}
+.about__p, .about__h4, .about__h3 {
+  margin-bottom: 0.5rem;
+}
+.about__img {
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  max-width: 150px;
+}
+@media screen and (max-width: 480px) {
+  .about__img {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+.about__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.about .button__btn {
+  border: 1px solid #555554;
+  border-radius: 50%;
+  color: #D9D9D9;
+  font-family: Montserrat, sans-serif;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+.about .button__btn--lk {
+  background-color: #0270AD;
+}
+.about .button__btn--gh {
+  background-color: #111111;
+}
+.about .button__btn--ig {
+  background-color: #6D44D5;
+}
+.about .habilidad {
+  background-color: #07090D;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 1rem;
+}
+.about .habilidad__ul {
+  margin: 0;
+  padding: 0;
+}
+.about .habilidad__li {
+  border: 1px solid #2D2747;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 12px;
+  margin: 0 7px 7px 0;
+  padding: 7px;
+}
+.about .habilidad__li--html {
+  background-color: #F64A1D;
+}
+.about .habilidad__li--css {
+  background-color: #163256;
+}
+.about .habilidad__li--js {
+  background-color: #EFD81D;
+  color: #07090D;
+}
+.about .habilidad__li--sass {
+  background-color: #C76494;
+}
+.about .habilidad__li--git {
+  background-color: #E84E31;
+}
+.about .habilidad__li--wp {
+  background-color: #227299;
+}
+.about .habilidad__li--ai {
+  background-color: #310000;
+}
+.about .habilidad__h4 {
+  padding: 1rem;
+}
+.about__div {
+  width: 65%;
+}
+@media screen and (max-width: 480px) {
+  .about__div {
+    width: 100%;
+  }
+}
+.about__div--skills {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.about__p {
+  margin-bottom: 1rem;
+}
+
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #07090D;
+  color: #D9D9D9;
+  padding: 3rem;
+}
+@media screen and (max-width: 480px) {
+  .footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column wrap;
+            flex-flow: column wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column wrap;
+            flex-flow: column wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+.footer__rrss {
+  margin: 1rem;
+}
+.footer__ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.footer__li {
+  margin: 0.5rem;
+  background-color: #272D40;
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+.footer__texto {
+  margin: 1rem;
+}
+.footer__logo {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+.footer__dda {
+  width: 100%;
+  text-align: right;
+  margin: 1rem;
+}
+@media screen and (max-width: 480px) {
+  .footer__dda {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .footer__dda {
+    width: inherit;
+  }
+}
